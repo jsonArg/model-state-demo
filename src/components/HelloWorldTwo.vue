@@ -2,10 +2,12 @@
   <div class="hello">
     <h2>{{msg}}</h2>
     <div v-for="(item) in sets" :key="item.id">
-      <div>
-        <p>
-          {{item.name}}
-        </p>
+      <div style="padding: 10px;background-color: #42b983">
+        <v-input
+            v-model="greeting"
+            label="Regular"
+            clearable
+        ></v-input>
         <p @click="plusONE(item)">
           count {{item.counter}}
         </p>
@@ -21,7 +23,7 @@
 import {mapGetters,mapActions, mapMutations } from "vuex";
 
 export default {
-  name : "HelloWorld",
+  name : "HelloWorldTwo",
   props: {
     msg: String
   },
