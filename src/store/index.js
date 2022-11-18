@@ -1,21 +1,36 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import setModule from "@/store/modules/setModule";
-import setsModule from "@/store/modules/setsModule";
+import SetModel from "@/store/models/setModel";
+
+
 
 Vue.use(Vuex)
-/* eslint-disable */
+
 export default new Vuex.Store({
   state: {
+    sets: []
+
   },
   getters: {
-  },
+    sets(state){
+      return state.sets
+    }
+
+    },
   mutations: {
+    parseSets (state,payload){
+      let  parsedSets=[]
+      payload.forEach(set=>{
+        parsedSets.push(new SetModel(set))
+      })
+      state.sets=parsedSets
+
+    }
   },
   actions: {
+    parseSets (context,payload) {
+      context.commit('parseSets',payload)
+    }
   },
-  modules: {
-    sets:setsModule,
-    set:setModule
-  }
+
 })

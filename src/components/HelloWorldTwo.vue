@@ -1,26 +1,39 @@
 <template>
-  <div class="hello">
+  <div class="light-green">
     <h2>{{msg}}</h2>
-    <div v-for="(item) in sets" :key="item.id">
-      <div style="padding: 10px;background-color: #42b983">
-        <v-input
-            v-model="greeting"
-            label="Regular"
-            clearable
-        ></v-input>
-        <p @click="plusONE(item)">
-          count {{item.counter}}
-        </p>
-      </div>
-    </div>
+    <v-container no-gutters v-for="(item) in sets" :key="item.id">
+      <v-row  >
+        <v-col>
+          <p>{{item}}</p>
+          <p>{{item.constructor.name}}</p>
+        </v-col>
+        <v-col>
+          <v-text-field
+              :placeholder="item.name"
+              v-model="names[item.id]"
+              :label="item.name"
+              filled
 
+          ></v-text-field>
+        </v-col>
+        </v-row>
+      <v-row>
+        <v-col>
+        <v-btn color="red"   @click="item.delete">Delete</v-btn>
+      </v-col>
+        <v-col>
+          <v-btn :disabled="!item.published"  @click="item.rename(names[item.id])">save</v-btn>
+        </v-col>
+
+      </v-row>
+    </v-container>
 
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-import {mapGetters,mapActions, mapMutations } from "vuex";
+
+import {mapGetters } from "vuex";
 
 export default {
   name : "HelloWorldTwo",
@@ -29,22 +42,21 @@ export default {
   },
   data () {
     return {
-      greeting: "ok"
-
+      state: "ok",
+      names:[],
     };
   },
   computed: {
     ...mapGetters({
-      sets: "sets/getSets"
+      sets: "sets"
     }),
+
+
+
+
   },
   methods : {
-    ...mapMutations({
-      rename:"set/rename_api"
-    }),
-    ...mapActions({
-      plusONE:"set/increment"
-    })
+
 
 
   }

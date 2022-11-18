@@ -1,24 +1,29 @@
 <template>
-  <div class="hello">
+  <div class="light-blue">
     <h2>{{msg}}</h2>
-    <div v-for="(item) in sets" :key="item.id">
-      <div>
-        <p>
-          {{item.name}}
-        </p>
-        <p @click="plusONE(item)">
-          count {{item.counter}}
-        </p>
-      </div>
-    </div>
+        <v-container>
+          <v-row no-gutters v-for="(item) in sets" :key="item.id">
+            <v-col>
+              <v-switch
+                  v-model="item.published"
+                  label="Visibility"
+              ></v-switch>
+            </v-col>
+            <v-col>
+              <p>id: {{item.id}}</p>
+            </v-col>
+            <v-col>
+              <p>Name: {{item.name}}</p>
+            </v-col>
 
-
+          </v-row>
+        </v-container>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-import {mapGetters,mapActions, mapMutations } from "vuex";
+import {mapGetters } from "vuex";
 
 export default {
   name : "HelloWorld",
@@ -27,23 +32,17 @@ export default {
   },
   data () {
     return {
-      greeting: "ok"
+      greeting: "ok",
+      visibility:[],
 
     };
   },
   computed: {
     ...mapGetters({
-      sets: "sets/getSets"
+      sets: "sets"
     }),
   },
   methods : {
-    ...mapMutations({
-      rename:"set/rename_api"
-    }),
-    ...mapActions({
-      plusONE:"set/increment"
-    })
-
 
   }
 };
