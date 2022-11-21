@@ -1,32 +1,10 @@
 <template>
-  <div class="light-green">
+  <div class="light-red">
     <h2>{{msg}}</h2>
-    <v-container no-gutters v-for="(item) in sets" :key="item.id">
-      <v-row  >
-        <v-col>
-          <p>{{item}}</p>
-          <p>{{item.constructor.name}}</p>
-        </v-col>
-        <v-col>
-          <v-text-field
-              :placeholder="item.name"
-              v-model="names[item.id]"
-              :label="item.name"
-              filled
+    <div v-for="(item) in sets" :key="item.index">
 
-          ></v-text-field>
-        </v-col>
-        </v-row>
-      <v-row>
-        <v-col>
-        <v-btn color="red"   @click="item.delete">Delete</v-btn>
-      </v-col>
-        <v-col>
-          <v-btn :disabled="!item.published"  @click="item.rename(names[item.id])">save</v-btn>
-        </v-col>
-
-      </v-row>
-    </v-container>
+    <HelloWorldTree  :item="item"/>
+    </div>
 
   </div>
 </template>
@@ -34,9 +12,11 @@
 <script>
 
 import {mapGetters } from "vuex";
+import HelloWorldTree from "@/components/HelloWorldThree";
 
 export default {
   name : "HelloWorldTwo",
+  components: {HelloWorldTree},
   props: {
     msg: String
   },

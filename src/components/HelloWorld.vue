@@ -2,7 +2,7 @@
   <div class="light-blue">
     <h2>{{msg}}</h2>
         <v-container>
-          <v-row no-gutters v-for="(item) in sets" :key="item.id">
+          <v-row no-gutters v-for="(item,index) in sets" :key="index">
             <v-col>
               <v-switch
                   v-model="item.published"
