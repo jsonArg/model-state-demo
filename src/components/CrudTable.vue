@@ -56,7 +56,7 @@
     </v-dialog>
     <v-data-table
 
-        :headers="set_headers"
+        :headers="table_headers"
         :items="sets"
         class="elevation-1"
         item-key="index"
@@ -72,6 +72,7 @@
 
 
       <template v-slot:[`item.actions`]="{ item }">
+      {{item}}
         <v-icon
             small
             class="mr-2"
@@ -104,7 +105,6 @@
 <script>
 
 import { mapGetters } from "vuex";
-import SetModel from "@/store/models/setModel";
 
 
 export default {
@@ -115,7 +115,6 @@ export default {
   },
   data () {
     return {
-
       state      : "ok",
       localSelect: [],
       new_name:"",
@@ -128,16 +127,19 @@ export default {
     ...mapGetters({
       sets: "sets"
     }),
-    set_headers () {
-      const x = new SetModel();
-      return x.table_headers();
-    }
-
+    table_headers:table_headers_maker(this.sets[0]),
+    
 
   },
+  mounted(){
+   
+   
+     
+    
+  },
   created () {
-
-
+  
+   
   },
 
   methods: {
@@ -156,6 +158,28 @@ export default {
 
       this.dialog      = false;
 
+    },
+      table_headers_maker (item) {
+        let headers=[]
+      
+
+            let keys = Object.getOwnPropertyNames(item);
+           
+
+            keys.forEach(key => {
+                let textValue =key.charAt(0).toUpperCase() + key.slice(1)
+                if(key==="index"){
+                    headers.push({text:textValue ,align: "start", value: key});
+                } else{
+                    headers.push({text:textValue , value: key});
+                }
+                
+
+            });
+
+            headers.push({ text: 'Actions', value: 'actions', sortable: false })
+            
+        this.table_headers=headers
     }
   }
 };

@@ -18,10 +18,12 @@ class SetModel {
         this.published = Math.random() < 0.5;
         this.cards     = Math.floor(Math.random() * 100);
         this.students  = Math.floor(Math.random() * 5000);
+        
 
-        this.rename  = this.rename.bind(this);
-        this.delete  = this.delete.bind(this);
-        this.add     = this.add.bind(this);
+         this.rename  = this.rename.bind(this);
+         this.delete  = this.delete.bind(this);
+         this.add     = this.add.bind(this);
+   
 
     }
 
@@ -45,22 +47,8 @@ class SetModel {
         }, 500);
     }
 
-    table_headers () {
-        return [
-            // Only property attributes that are table headers
-            {text: "Index", align: "start", value: "index"},
-            {text: "ID", value: "id"},
-            {text: "Name", value: "name"},
-            {text: "Count", value: "counter"},
-            { text: 'Published', value: 'published'},
-            { text: 'Students', value: 'students'},
-            { text: 'Cards', value: 'cards'},
+   
 
-            { text: 'Actions', value: 'actions', sortable: false },
-
-        ];
-
-    }
 
 
 }

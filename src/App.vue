@@ -2,35 +2,6 @@
   <v-app>
     <v-main>
       <v-container class=" text-center grey lighten-5">
-
-        <v-row>
-          <v-col>
-            <h2>How it works</h2>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="12">
-            <v-row>
-              <v-col>
-                <h2 class="text-capitalize text-center orange darken-4">open console ! </h2>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <HelloWorld msg="sets stuff"/>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <HelloWorldTwo msg="set stuff"/>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <v-container class=" text-center grey lighten-5">
         <v-row>
           <v-col>
             <CrudTable msg="table_demo stuff"/>
@@ -42,8 +13,6 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-import HelloWorldTwo from "@/components/HelloWorldTwo";
 import { mapGetters, mapMutations } from "vuex/dist/vuex.esm.browser";
 import CrudTable from "@/components/CrudTable";
 
@@ -54,8 +23,7 @@ export default {
 
   components: {
     CrudTable,
-    HelloWorldTwo,
-    HelloWorld
+
   },
   methods   : {
     ...mapMutations({
@@ -71,16 +39,25 @@ export default {
     })
   },
   created () {
-    this.parseSets(this.sample);
+
+        //
+        // /posts	100 posts
+        // /comments	500 comments
+        // /albums	100 albums
+        // /photos	5000 photos
+        // /todos	200 todos
+        // /users	10 users
+
+        fetch('https://jsonplaceholder.typicode.com/comments')    //api for the get request
+      .then(response => response.json())
+      .then(data => this.parseSets(data));
+
+      
+    
   },
   data: () => ({
 
-    sample: [
-      {id: 1, name: "the set x1", counter: 1},
-      {id: 3, name: "the set x2", counter: 1},
-      {id: 3, name: "the set x2", counter: 1},
-      {id: 3, name: "the set x2", counter: 1}
-    ]
+    
 
   })
 };

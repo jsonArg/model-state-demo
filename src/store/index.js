@@ -23,7 +23,7 @@ export default new Vuex.Store({
       let  parsedSets=[]
       payload.forEach((set,index)=>{
         set.index=index
-        console.log(index)
+
         parsedSets.push(new SetModelClass(set))
       })
       state.sets=parsedSets
